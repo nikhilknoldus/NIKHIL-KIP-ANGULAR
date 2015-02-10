@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html data-ng-app="NikhilApp">
+<title>Testing the BootStrap</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="jquery_2.1.1.min.js"></script>
+<script type="text/javascript"
+	src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="angular.min.js"></script>
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<script type="text/javascript" src="js/list.js"></script>
+<script type="text/javascript">
+	$scope.order = function(predicate, reverse) {
+		$scope.list = orderBy($scope.list, predicate, reverse);
+	};
+</script>
+
+</head>
+
+<!-- Defining body and declaring the controller -->
+<body data-ng-controller="MyController" data-ng-init="num=10">
+
+	<!-- Main container is started -->
+	<div class="container">
+		<div class="row" style="background-color: black;">
+
+			<div class="col-md-3">
+				<h3 style="color: white;">Angular Project</h3>
+			</div>
+
+			<div class="col-md-2"></div>
+
+			<!-- This input box is filtering the names from json data -->
+			<div class="col-md-3" style="padding-top: 13px">
+				<input type="text" class="input-sm" data-ng-model="searchtextbox"
+					placeholder="Search Here">
+			</div>
+			<!-- Input ends here -->
+			<div class="col-md-2" style="padding-top: 10px">
+				<h4 style="color: white;">Dashboard</h4>
+			</div>
+
+			<div class="col-md-2" style="padding-top: 10px">
+				<h4 style="color: white;">Users</h4>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Dashboard</h2>
+				<div class="alert alert-info">
+					<h4>Total Filtered Records: {{filtered.length}}</h4>
+
+				</div>
+				<hr>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-2"></div>
+			<!-- defining drop down for limit -->
+			<div class="col-md-3">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button"
+						id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						Limit By <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu"
+						aria-labelledby="dropdownMenu1">
+						<li role="presentation" data-ng-click="num=5"><a
+							role="menuitem" tabindex="-1" href="#">5</a></li>
+						<li role="presentation" data-ng-click="num=10"><a
+							role="menuitem" tabindex="-1" href="#">10</a></li>
+						<li role="presentation" data-ng-click="num=20"><a
+							role="menuitem" tabindex="-1" href="#">20</a></li>
+						<li role="presentation" data-ng-click="num=50"><a
+							role="menuitem" tabindex="-1" href="#">50</a></li>
+						<li role="presentation" data-ng-click="num=100"><a
+							role="menuitem" tabindex="-1" href="#">100</a></li>
+
+					</ul>
+				</div>
+			</div>
+
+
+			<div class="col-md-3">
+
+				<!-- defining drop down for limit -->
+				<div class="col-md-3">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button"
+							id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+							Sort By <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu"
+							aria-labelledby="dropdownMenu1">
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#">Id</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#" data-ng-click="reverse=!reverse;order('name', reverse)">Name</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#"
+								data-ng-click="reverse=!reverse;order('gender', reverse)">Gender</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#"
+								data-ng-click="reverse=!reverse;order('company', reverse)">Company</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#"
+								data-ng-click="reverse=!reverse;order('email', reverse)">Email</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#"
+								data-ng-click="reverse=!reverse;order('phone', reverse)">Phone</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="#"
+								data-ng-click="reverse=!reverse;order('registered', reverse)">Registered</a></li>
+
+						</ul>
+					</div>
+					<!-- 		<select data-ng-option="li.name for li in list | orderBy:'-name'">Name</select>  -->
+				</div>
+
+
+			</div>
+
+			<div class="col-md-3">
+				<input type="text" class="form-control" id="SearchUsers"
+					data-ng-model="searchtextbox" placeholder="Search Users">
+
+			</div>
+			<div class="col-md-1"></div>
+
+		</div>
+
+		<div class="row">
+			<hr>
+		</div>
+
+		<div class="row">
+			<div class="panel panel-primary">
+
+				<table class="table table-striped">
+
+					<tr>
+						<th>ID</th>
+						<th><a href=""
+							data-ng-click="reverse=!reverse;order('name', reverse)">Name</a></th>
+						<th><a href=""
+							data-ng-click="reverse=!reverse;order('gender', reverse)">Gender</a></th>
+						<th><a href=""
+							data-ng-click="reverse=!reverse;order('company', reverse)">Company</a></th>
+						<th><a href=""
+							data-ng-click="reverse=!reverse;order('email', reverse)">Email</a></th>
+						<th><a href=""
+							data-ng-click="reverse=!reverse;order('phone', reverse)">Phone</a></th>
+						<th><a href=""
+							data-ng-click="reverse=!reverse;order('date', reverse)">Date</a></th>
+					</tr>
+
+					<tr>
+					<tr
+						data-ng-repeat="item in list | filter: searchtextbox | limitTo: num ">
+
+						<td>{{item._id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.gender}}</td>
+						<td>{{item.company}}</td>
+						<td>{{item.email}}</td>
+						<td>{{item.phone}}</td>
+						<td>{{item.registered}}</td>
+					</tr>
+
+
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Main Container is ends here -->
+</body>
+<!-- End Body tag -->
+</html>

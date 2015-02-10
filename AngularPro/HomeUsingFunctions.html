@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html data-ng-app="NikApp">
+<title>Creating JSON list application using the functions</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="jquery_2.1.1.min.js"></script>
+<script type="text/javascript"
+	src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="angular.min.js"></script>
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<script type="text/javascript" src="js/jasondata.js"></script>
+</head>
+
+<!-- Body tag contains controller name defined in the .js file and initializing the listlim variable to 10 -->
+<body data-ng-controller="MyCon" data-ng-init="listlim=10">
+	<div class="container">
+
+		<div class="row" style="background-color: black;">
+			<!-- Defining the page header of the page -->
+			<div id="header" class="col-md-12">
+				<label style="color: white; height: 40px;">ANGULAR PROJECT</label> <input
+					type="text" id="text1" value="search"
+					style="height: 40px; margin-left: 500px; margin-top: 10px;">
+				<label style="color: white; height: 40px; margin-left: 50px;">DashBoard</label>
+				<label style="color: white; height: 40px; margin-left: 50px;">Users</label>
+			</div>
+		</div>
+		<div class="row" style="background-color: white;">
+			<div id="header1" class="col-md-12">
+				<h1>Dashing board</h1>
+				<hr width="100%" size="15%" color="gray">
+			</div>
+		</div>
+		<div class="row" style="background-color: white;">
+
+			<!--FORM TAG STARTING
+			This inline form contains 2 dropdowns for filtering the jason data dynamically 
+			and having two different filters 1-number of records show limit and 2-for filtering on the
+			basis of particular field-->
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="Name" style="margin-left: 200px;">Limit:</label> <select
+						class="form-control" id="name" data-ng-model="listlim">
+						<option selected="selected">10</option>
+						<option>20</option>
+						<option>50</option>
+						<option>100</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="SortBy" style="margin-left: 50px;">Sort By:</label> <select
+						class="form-control" id="name" data-ng-model="order">
+						<option>name</option>
+						<option>email</option>
+						<option>company</option>
+						<option>phone</option>
+						<option>Date</option>
+					</select>
+				</div>
+				<label for="search" style="margin-left: 50px;">Search</label> <input
+					type="text" class="form-control" id="inputEmail"
+					placeholder="Search users.." data-ng-model="filterData">
+			</form>
+			<!-- FORM TAG ENDING -->
+		</div>
+<br>
+<!-- STARTING PANEL -->
+<!-- Panel tag that contains the table of json data -->
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background-color: black; color:white;">Jason Data</div>
+			<div class="panel-body">
+
+
+				<div class="row" style="background-color: white;">
+
+					<!-- handling the sort operation of the basis of selection -->
+					<table class="table table-striped">
+						<tr>
+							<!-- sort function is taking field parameter to sort the json data -->
+							<th data-ng-click="Sort('name')">Name</th>
+							<th data-ng-click="Sort('gender')">Gender</th>
+							<th data-ng-click="Sort('company')">Company</th>
+							<th data-ng-click="Sort('email')">Email</th>
+							<th data-ng-click="Sort('phone')">Phone</th>
+							<th data-ng-click="Sort('date')">Date</th>
+						</tr>
+						<!-- data-ng-repeat contains different filters defined in the jasondata.js file -->
+						<tr
+							data-ng-repeat="data in results|limitTo:listlim|orderBy:order|filter:filterData">
+							<td>{{data.name}}</td>
+							<td>{{data.gender}}</td>
+							<td>{{data.company}}</td>
+							<td>{{data.email}}</td>
+							<td>{{data.phone}}</td>
+							<td>{{data.registered}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- ENDING PANEL TAG -->
+		
+	</div>
+</body>
+</html>
